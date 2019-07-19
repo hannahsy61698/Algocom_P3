@@ -296,16 +296,10 @@ public class Driver {
 		int mid = size / 2;
 		Point midPoint = pointX.get(mid);
 		
-//		System.out.println("size: " + size);
-//		System.out.println("pointX size:  " + pointX.size());
-//		System.out.println("pointY size: " + pointY.size());
-//		System.out.println("Mid: " + mid);
-		
 		
 		List<Point> PYL = new ArrayList<Point>();
 		List<Point> PYR = new ArrayList<Point>();
 		
-		//separate the points to PL and PR (sorted in Y)
 		for(int i = 0; i < size; i++) {
 			
 			if(i < mid) 
@@ -314,34 +308,22 @@ public class Driver {
 				PYR.add(pointY.get(i));	
 		}
 		
-		//shift point x so that it will access the other half of the points
 		List<Point> shiftedPointX = new ArrayList<Point>();
 		for(int i = 0; i < size - mid - 1; i++) {
 			shiftedPointX.add(pointX.get(i + mid + 1));
 		}
-		
-//		System.out.println("PYL: " + PYL.size());
-//		System.out.println("PYR: " + PYR.size());
-//		System.out.println();
-		
-		//find closest pair of points on the left and right of the midpoint.
 		double distanceLeft = findClosestPair(pointX, PYL, mid);
 		double distanceRight = findClosestPair(shiftedPointX, PYR, (size - mid - 1));
 		
-		//Find the smallest distance between the left and right.
 		double distance = Math.min(distanceLeft, distanceRight);
 		
-		//Optimized combined step
 		List<Point> rectangle = new ArrayList<Point>();
 		for(int i = 0; i < size; i++) {
 			
-			//If true, there's a special case of Delta(SL,SR)
 			if(Math.abs(pointY.get(i).getX() - midPoint.x) < distance) 
 				rectangle.add(pointY.get(i));
 			
 		}
-		
-		//Find the minimum between the smallest distance and the possible smallest distance on the special case.
 		return Math.min(distance, rectangleClosest(rectangle, distance));	
 	}
 	
@@ -385,8 +367,6 @@ public class Driver {
 		
  		return min;
 	}
-	
-	//Euclidean Distance formula
 	private static double calculateDistance(Point p1, Point p2) {
 		return Math.sqrt((p1.getX() - p2.getX()) * (p1.getX() - p2.getX()) +
 				         (p1.getY() - p2.getY()) * (p1.getY() - p2.getY()));
