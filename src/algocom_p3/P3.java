@@ -204,9 +204,32 @@ public class P3 {
             public int x;  //X-coordinate
             public int y; // Y-coordinate}
         }
+        
+        	public int getX() {
+            return this.x;
+	}
+		
+	public int getY() {
+            return this.y;
+	}
+		
+	public void setX(int x) {
+            this.x = x;
+	}
+		
+	public void setY(int y) {
+            this.y = y;
+	}
+
         public static void closestPair (Pt[] P) {
            //put your code here and the print statements for the output.
         }
+        
+        private static double calculateDistance(Pt p1, Pt p2) {
+		return Math.sqrt((p1.getX() - p2.getX()) * (p1.getX() - p2.getX()) +
+				         (p1.getY() - p2.getY()) * (p1.getY() - p2.getY()));
+	}
+	
 
 	
 }
